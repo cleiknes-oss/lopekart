@@ -1,11 +1,7 @@
 # Løpekart
 
-Kart over løpeturene mine fra Strava, med Kartverket-kart, satellitt og OpenStreetMap.
+Privat kart over løpeturene mine.
 
-- `index.html` er selve kartet. Det bygges på nytt hver natt fra Strava.
-- `build/build.py` bygger kartet fra Strava-svar (`list_activities` med `include_polyline`).
-- `build/korreksjoner.csv` retter turer der klokka døde eller GPS-en sviktet, og fjerner feilopptak.
+Kartdataene er kryptert (AES-256-GCM, nøkkel avledet med PBKDF2-SHA256), og siden krever passord. Uten passordet inneholder repoet ingen turer, steder eller datoer.
 
-**Personvern:** Sporene klippes innenfor 500 m fra steder der minst tre turer starter eller slutter, slik at hjemmet ikke vises. Siden ber søkemotorer om ikke å indeksere den.
-
-Lenke til én tur: `…/lopekart/#<strava-aktivitets-id>`
+Ekstra vern i tillegg til krypteringen: hver tur kortes av med en tilfeldig lengde i begge ender, og områdene rundt steder der mange turer starter, skjules med tilfeldig størrelse og plassering.

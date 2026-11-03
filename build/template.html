@@ -37,12 +37,31 @@
   .legend { position: fixed; z-index: 1000; left: 10px; bottom: max(24px, env(safe-area-inset-bottom)); padding: 8px 10px; font-size: 12px; }
   .legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
   .legend div + div { margin-top: 3px; }
+  #lock { position: fixed; inset: 0; z-index: 3000; display: flex; align-items: center; justify-content: center; background: var(--bg); padding: 16px; }
+  #lock[hidden] { display: none; }
+  .lockbox { width: min(360px, 100%); padding: 22px; display: grid; gap: 12px; }
+  .lockbox .lt { font-size: 22px; font-weight: 700; }
+  .lockbox p { margin: 0; color: var(--muted); }
+  .lockbox input[type=password] { font: inherit; font-size: 17px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--fg); }
+  .lockbox button { font: inherit; font-weight: 700; padding: 12px; border: 0; border-radius: 9px; background: var(--acc); color: #fff; cursor: pointer; }
+  .lockbox .rem { font-size: 13px; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+  .lockbox .lm { font-size: 14px; color: var(--acc); min-height: 1.2em; }
+  .forget { font: inherit; font-size: 12px; background: none; border: 0; color: var(--muted); text-decoration: underline; cursor: pointer; padding: 0 12px 8px; }
 </style>
 </head>
 <body>
+<div id="lock"><form id="lock-form" class="box lockbox" autocomplete="on">
+  <div class="lt">Løpekart</div>
+  <p>Kartet er låst. Skriv inn passordet.</p>
+  <input type="text" name="username" value="lopekart" autocomplete="username" hidden>
+  <input id="lock-pw" type="password" autocomplete="current-password" placeholder="Passord" required>
+  <label class="rem"><input type="checkbox" id="lock-rem" checked> Husk på denne enheten</label>
+  <button type="submit">Lås opp</button>
+  <div id="lock-msg" class="lm"></div>
+</form></div>
 <div id="map"></div>
 <div class="bar">
-  <div class="box title">Løpekart<small id="count"></small></div>
+  <div class="box title">Løpekart<small id="count"></small><button type="button" class="forget" id="lock-forget">Lås igjen</button></div>
   <div class="box seg" id="per">
     <button data-d="30" aria-pressed="false">30 dager</button>
     <button data-d="90" aria-pressed="false">90 dager</button>
@@ -56,8 +75,9 @@
 
 <script>/*@@LEAFLET@@*/</script>
 <script>
-const DATA = /*@@DATA@@*/;
-const OPPDATERT = '/*@@DATE@@*/';
+const ENC = /*@@DATA@@*/;
+function start(DATA) {
+const OPPDATERT = DATA.reduce((m, a) => (a.d > m ? a.d : m), '');
 
 const decode = (str) => {
   let i = 0, lat = 0, lng = 0; const out = [];
@@ -146,7 +166,7 @@ function draw(fit) {
     l.addTo(group);
   });
   const km = shown.reduce((s, a) => s + (a.km || 0), 0);
-  document.getElementById('count').textContent = `${shown.length} turer · ${Math.round(km).toLocaleString('nb-NO')} km · data per ${fmtDate(OPPDATERT)}`;
+  document.getElementById('count').textContent = `${shown.length} turer · ${Math.round(km).toLocaleString('nb-NO')} km · siste tur ${fmtDate(OPPDATERT)}`;
   routeSel.replaceChildren(new Option('Velg en tur …', ''), ...shown.slice().sort((a, b) => (a.d < b.d ? 1 : -1)).map((a) => new Option(fmtDate(a.d) + ' – ' + a.n + ' (' + fmtKm(a.km) + ' km)', a.id)));
   selected = null; restyle();
   if (fit && shown.length) {
@@ -178,6 +198,35 @@ draw(true);
 const openHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (!id) return; if (![...routeSel.options].some((o) => o.value === id)) { days = 0; type = ''; typeSel.value = ''; document.querySelectorAll('#per button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.d === '0'))); draw(false); } routeSel.value = id; routeSel.onchange(); };
 window.addEventListener('hashchange', openHash);
 openHash();
+}
+
+// ---------- Opplåsing ----------
+(() => {
+  const KEY = 'lopekart.pw';
+  const lock = document.getElementById('lock'), form = document.getElementById('lock-form'), inp = document.getElementById('lock-pw'), msg = document.getElementById('lock-msg'), rem = document.getElementById('lock-rem');
+  const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+  async function open(pw) {
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(ENC.salt), iterations: ENC.rounds, hash: 'SHA-256'}, base, {name: 'AES-GCM', length: 256}, false, ['decrypt']);
+    const plain = await crypto.subtle.decrypt({name: 'AES-GCM', iv: b64(ENC.iv)}, key, b64(ENC.ct));
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
+  async function tryOpen(pw, remember) {
+    msg.textContent = 'Låser opp …';
+    try {
+      const data = await open(pw);
+      try { if (remember) localStorage.setItem(KEY, pw); } catch (e) { /* ingen lagring */ }
+      lock.hidden = true;
+      start(data);
+      return true;
+    } catch (e) { msg.textContent = 'Feil passord.'; return false; }
+  }
+  form.addEventListener('submit', (e) => { e.preventDefault(); tryOpen(inp.value, rem.checked); });
+  document.getElementById('lock-forget').addEventListener('click', () => { try { localStorage.removeItem(KEY); } catch (e) {} location.reload(); });
+  if (!window.crypto || !crypto.subtle) { msg.textContent = 'Nettleseren støtter ikke dekryptering. Bruk en oppdatert Chrome, Safari eller Firefox.'; return; }
+  let saved = null; try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved) tryOpen(saved, false).then((ok) => { if (!ok) { try { localStorage.removeItem(KEY); } catch (e) {} msg.textContent = ''; } });
+})();
 </script>
 </body>
 </html>
