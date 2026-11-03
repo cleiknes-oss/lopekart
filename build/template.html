@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f1f1c">
+<meta name="robots" content="noindex, nofollow">
+<title>Løpekart</title>
+<style>/*@@LEAFLETCSS@@*/</style>
+<style>
+  :root { --bg: #f6f5f1; --panel: #ffffff; --fg: #1d1c19; --muted: #6b6860; --line: #e4e1d8; --acc: #e4572e; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #161614; --panel: #1f1f1c; --fg: #ecebe6; --muted: #a09d94; --line: #34332f; } }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  #map { position: fixed; inset: 0; }
+  .bar { position: fixed; z-index: 1000; left: 10px; right: 10px; top: max(10px, env(safe-area-inset-top)); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; pointer-events: none; }
+  .bar > * { pointer-events: auto; }
+  .box { background: var(--panel); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+  .title { padding: 8px 12px; font-weight: 600; }
+  .title small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+  .seg { display: flex; overflow: hidden; }
+  .seg button { font: inherit; font-size: 13px; border: 0; background: none; color: var(--muted); padding: 8px 11px; cursor: pointer; border-right: 1px solid var(--line); }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+  select.box { font: inherit; font-size: 13px; padding: 8px 10px; }
+  .layers { position: fixed; z-index: 1000; right: 10px; bottom: max(24px, env(safe-area-inset-bottom)); }
+  .layers .seg { flex-direction: column; }
+  .layers .seg button { border-right: 0; border-bottom: 1px solid var(--line); text-align: left; }
+  .layers .seg button:last-child { border-bottom: 0; }
+  .leaflet-popup-content { font: 14px/1.4 system-ui, sans-serif; margin: 12px 14px; }
+  .pop b { font-size: 15px; }
+  .pop .m { color: #6b6860; font-size: 12px; }
+  .pop .g { display: grid; grid-template-columns: repeat(3, auto); gap: 2px 14px; margin: 6px 0; font-variant-numeric: tabular-nums; }
+  .pop .g span { color: #6b6860; font-size: 11px; display: block; }
+  .pop .f { color: #b7791f; font-size: 12px; }
+  .pop a { color: #e4572e; font-weight: 600; text-decoration: none; }
+  .legend { position: fixed; z-index: 1000; left: 10px; bottom: max(24px, env(safe-area-inset-bottom)); padding: 8px 10px; font-size: 12px; }
+  .legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  .legend div + div { margin-top: 3px; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="bar">
+  <div class="box title">Løpekart<small id="count"></small></div>
+  <div class="box seg" id="per">
+    <button data-d="30" aria-pressed="false">30 dager</button>
+    <button data-d="90" aria-pressed="false">90 dager</button>
+    <button data-d="0" aria-pressed="true">Alle</button>
+  </div>
+  <select class="box" id="type" aria-label="Type"><option value="">Alle typer</option></select>
+  <select class="box" id="route" aria-label="Velg tur"><option value="">Velg en tur …</option></select>
+</div>
+<div class="box layers"><div class="seg" id="base"></div></div>
+<div class="box legend" id="legend"></div>
+
+<script>/*@@LEAFLET@@*/</script>
+<script>
+const DATA = /*@@DATA@@*/;
+const OPPDATERT = '/*@@DATE@@*/';
+
+const decode = (str) => {
+  let i = 0, lat = 0, lng = 0; const out = [];
+  while (i < str.length) {
+    let b, sh = 0, r = 0;
+    do { b = str.charCodeAt(i++) - 63; r |= (b & 0x1f) << sh; sh += 5; } while (b >= 0x20 && i < str.length);
+    lat += r & 1 ? ~(r >> 1) : r >> 1; sh = 0; r = 0;
+    do { b = str.charCodeAt(i++) - 63; r |= (b & 0x1f) << sh; sh += 5; } while (b >= 0x20 && i < str.length);
+    lng += r & 1 ? ~(r >> 1) : r >> 1;
+    out.push([lat / 1e5, lng / 1e5]);
+  }
+  return out;
+};
+const fmtDur = (s) => { s = Math.round(s); const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60; return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(x).padStart(2, '0'); };
+const fmtKm = (v) => v.toLocaleString('nb-NO', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const fmtDate = (s) => new Date(s + 'T12:00:00').toLocaleDateString('nb-NO', {day: 'numeric', month: 'short', year: 'numeric'});
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+
+const COLORS = {'Løp': '#e4572e', 'Mølle': '#e4572e', 'Gåtur': '#2f7de1', 'Ski': '#7b4fd6', 'Padling': '#14a3a3', 'Annet': '#8a8a8a'};
+
+const map = L.map('map', {zoomControl: false, preferCanvas: false}).setView([59.76, 11.03], 12);
+L.control.zoom({position: 'topright'}).addTo(map);
+L.control.scale({imperial: false, position: 'bottomright'}).addTo(map);
+
+const BASES = {
+  'Kart': L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/topo/default/webmercator/{z}/{y}/{x}.png', {maxZoom: 18, attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>'}),
+  'Gråtone': L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/topograatone/default/webmercator/{z}/{y}/{x}.png', {maxZoom: 18, attribution: '&copy; <a href="https://www.kartverket.no/">Kartverket</a>'}),
+  'Satellitt': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 19, attribution: 'Bilder &copy; Esri, Maxar, Earthstar Geographics'}),
+  'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}),
+};
+// Kartverket dekker bare Norge: utenfor Norge byttes automatisk til OpenStreetMap
+let baseName = 'Kart';
+try { baseName = localStorage.getItem('lopekart.base') || 'Kart'; } catch (e) { /* ingen lagring */ }
+if (!BASES[baseName]) baseName = 'Kart';
+let current = BASES[baseName].addTo(map);
+const baseBox = document.getElementById('base');
+Object.keys(BASES).forEach((n) => {
+  const b = document.createElement('button'); b.textContent = n; b.setAttribute('aria-pressed', String(n === baseName));
+  b.onclick = () => {
+    map.removeLayer(current); current = BASES[n].addTo(map); baseName = n;
+    [...baseBox.children].forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    try { localStorage.setItem('lopekart.base', n); } catch (e) { /* ingen lagring */ }
+    restyle();
+  };
+  baseBox.append(b);
+});
+
+const acts = DATA.map((a) => ({...a, segs: a.p.map(decode), c: COLORS[a.t] || COLORS.Annet}));
+const latest = acts.reduce((m, a) => (a.d > m ? a.d : m), '');
+const typeSel = document.getElementById('type');
+[...new Set(acts.map((a) => a.t))].sort().forEach((t) => typeSel.append(new Option(t, t)));
+const legend = document.getElementById('legend');
+[...new Set(acts.map((a) => a.t))].forEach((t) => { const d = document.createElement('div'); d.innerHTML = `<i style="background:${COLORS[t] || COLORS.Annet}"></i>${esc(t)}`; legend.append(d); });
+
+let days = 0, type = '', selected = null;
+const group = L.featureGroup().addTo(map);
+
+const popup = (a) => {
+  const tempo = (a.t === 'Løp' || a.t === 'Mølle') && a.km ? fmtDur(a.s / a.km) + '/km' : '–';
+  return `<div class="pop"><b>${esc(a.n)}</b><div class="m">${fmtDate(a.d)} · ${esc(a.t)}</div>
+    <div class="g"><div><span>Distanse</span>${fmtKm(a.km)} km</div><div><span>Tid</span>${fmtDur(a.s)}</div><div><span>Tempo</span>${tempo}</div>
+    <div><span>Høyde</span>${a.hm} m</div><div><span>Effort</span>${a.re ?? '–'}</div></div>
+    ${a.f ? `<div class="f">Rettet: ${esc(a.f)}</div>` : ''}
+    <a href="https://www.strava.com/activities/${encodeURIComponent(a.id)}" target="_blank" rel="noopener">Åpne i Strava ›</a></div>`;
+};
+
+function restyle() {
+  const sat = baseName === 'Satellitt';
+  group.eachLayer((l) => {
+    const a = l._act, on = !selected || selected === a;
+    l.setStyle({color: sat && !selected ? '#ffd23f' : a.c, weight: selected === a ? 5 : 3, opacity: selected ? (on ? 1 : 0.15) : (sat ? 0.75 : 0.55)});
+    if (selected === a) l.bringToFront();
+  });
+}
+
+function draw(fit) {
+  group.clearLayers();
+  const from = days ? new Date(new Date(latest + 'T12:00:00').getTime() - days * 864e5).toISOString().slice(0, 10) : '';
+  const shown = acts.filter((a) => (!type || a.t === type) && (!from || a.d > from) && a.segs.length);
+  shown.forEach((a) => {
+    const l = L.polyline(a.segs, {color: a.c, weight: 3, opacity: 0.55, lineJoin: 'round'});
+    l._act = a;
+    l.bindPopup(() => popup(a), {maxWidth: 280});
+    l.on('click', () => { selected = a; routeSel.value = a.id; restyle(); });
+    l.on('popupclose', () => { if (selected === a) { selected = null; routeSel.value = ''; restyle(); } });
+    l.addTo(group);
+  });
+  const km = shown.reduce((s, a) => s + (a.km || 0), 0);
+  document.getElementById('count').textContent = `${shown.length} turer · ${Math.round(km).toLocaleString('nb-NO')} km · data per ${fmtDate(OPPDATERT)}`;
+  routeSel.replaceChildren(new Option('Velg en tur …', ''), ...shown.slice().sort((a, b) => (a.d < b.d ? 1 : -1)).map((a) => new Option(fmtDate(a.d) + ' – ' + a.n + ' (' + fmtKm(a.km) + ' km)', a.id)));
+  selected = null; restyle();
+  if (fit && shown.length) {
+    // Start på stedet der du har løpt mest
+    const key = (a) => a.segs[0][0].map((v) => v.toFixed(1)).join(',');
+    const cnt = new Map(); shown.forEach((a) => cnt.set(key(a), (cnt.get(key(a)) || 0) + 1));
+    const top = [...cnt].sort((x, y) => y[1] - x[1])[0][0];
+    map.fitBounds(L.featureGroup(shown.filter((a) => key(a) === top).map((a) => L.polyline(a.segs))).getBounds(), {padding: [40, 40]});
+  }
+}
+
+const routeSel = document.getElementById('route');
+routeSel.onchange = () => {
+  let hit = null;
+  group.eachLayer((l) => { if (l._act.id === routeSel.value) hit = l; });
+  if (!hit) { selected = null; restyle(); map.closePopup(); return; }
+  selected = hit._act; restyle();
+  map.fitBounds(hit.getBounds(), {padding: [60, 60]});
+  hit.openPopup(hit.getCenter());
+};
+document.querySelectorAll('#per button').forEach((b) => b.onclick = () => {
+  days = Number(b.dataset.d);
+  document.querySelectorAll('#per button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  draw(false);
+});
+typeSel.onchange = () => { type = typeSel.value; draw(false); };
+draw(true);
+// Lenke til én tur: …/#<strava-id>
+const openHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (!id) return; if (![...routeSel.options].some((o) => o.value === id)) { days = 0; type = ''; typeSel.value = ''; document.querySelectorAll('#per button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.d === '0'))); draw(false); } routeSel.value = id; routeSel.onchange(); };
+window.addEventListener('hashchange', openHash);
+openHash();
+</script>
+</body>
+</html>
