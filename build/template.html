@@ -46,6 +46,9 @@
   .lockbox button { font: inherit; font-weight: 700; padding: 12px; border: 0; border-radius: 9px; background: var(--acc); color: #fff; cursor: pointer; }
   .lockbox .rem { font-size: 13px; color: var(--muted); display: flex; gap: 6px; align-items: center; }
   .lockbox .lm { font-size: 14px; color: var(--acc); min-height: 1.2em; }
+  .note { position: fixed; z-index: 1500; left: 50%; transform: translateX(-50%); top: 120px; width: min(420px, calc(100% - 32px)); padding: 12px 14px; font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .note[hidden] { display: none; }
+  .note button { font: inherit; border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 18px; line-height: 1; padding: 0; }
   .forget { font: inherit; font-size: 12px; background: none; border: 0; color: var(--muted); text-decoration: underline; cursor: pointer; padding: 0 12px 8px; }
 </style>
 </head>
@@ -72,6 +75,7 @@
 </div>
 <div class="box layers"><div class="seg" id="base"></div></div>
 <div class="box legend" id="legend"></div>
+<div class="box note" id="note" role="status" hidden><span id="note-t"></span><button type="button" id="note-x" aria-label="Lukk">×</button></div>
 
 <script>/*@@LEAFLET@@*/</script>
 <script>
@@ -195,7 +199,9 @@ document.querySelectorAll('#per button').forEach((b) => b.onclick = () => {
 typeSel.onchange = () => { type = typeSel.value; draw(false); };
 draw(true);
 // Lenke til én tur: …/#<strava-id>
-const openHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (!id) return; if (![...routeSel.options].some((o) => o.value === id)) { days = 0; type = ''; typeSel.value = ''; document.querySelectorAll('#per button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.d === '0'))); draw(false); } routeSel.value = id; routeSel.onchange(); };
+const openHash = () => { const id = decodeURIComponent(location.hash.slice(1)); if (!id) return; if (![...routeSel.options].some((o) => o.value === id)) { days = 0; type = ''; typeSel.value = ''; document.querySelectorAll('#per button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.d === '0'))); draw(false); } if (![...routeSel.options].some((o) => o.value === id)) { document.getElementById('note-t').textContent = 'Denne turen er ikke på kartet. Den er enten for kort etter at start og slutt er kuttet bort, ligger helt i et skjult område, mangler GPS-spor, eller er nyere enn kartet' + (ENC.built ? ' (oppdatert ' + fmtDate(ENC.built) + ')' : '') + '.'; document.getElementById('note').hidden = false; return; }
+  document.getElementById('note').hidden = true; routeSel.value = id; routeSel.onchange(); };
+document.getElementById('note-x').onclick = () => { document.getElementById('note').hidden = true; };
 window.addEventListener('hashchange', openHash);
 openHash();
 }

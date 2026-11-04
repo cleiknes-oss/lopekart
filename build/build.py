@@ -189,7 +189,7 @@ def main(files, korr_path, password):
     iv = hmac.new(key, b"iv:" + plain, "sha256").digest()[:12]
     ct = AESGCM(key).encrypt(iv, plain, None)
     b64 = lambda b: base64.b64encode(b).decode()
-    blob = json.dumps({"v": 2, "rounds": PBKDF2_ROUNDS, "salt": b64(SALT), "iv": b64(iv), "ct": b64(ct)})
+    blob = json.dumps({"v": 2, "built": datetime.date.today().isoformat(), "rounds": PBKDF2_ROUNDS, "salt": b64(SALT), "iv": b64(iv), "ct": b64(ct)})
     tpl = open(os.path.join(HERE, "template.html"), encoding="utf-8").read()
     js = open(os.path.join(HERE, "leaflet.js"), encoding="utf-8").read()
     css = open(os.path.join(HERE, "leaflet.css"), encoding="utf-8").read()
