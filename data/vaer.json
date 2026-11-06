@@ -1,0 +1,92 @@
+[
+{
+"dato": "2026-11-06",
+"tmin": -2,
+"tmax": 2,
+"nedbor": 0.0,
+"vind": 1,
+"symbol": "partlycloudy_day",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+},
+{
+"dato": "2026-11-07",
+"tmin": -1,
+"tmax": 2,
+"nedbor": 0.0,
+"vind": 1,
+"symbol": "fog",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+},
+{
+"dato": "2026-11-08",
+"tmin": -1,
+"tmax": 3,
+"nedbor": 0.0,
+"vind": 1,
+"symbol": "fog",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+},
+{
+"dato": "2026-11-09",
+"tmin": 1,
+"tmax": 2,
+"nedbor": 0.0,
+"vind": 1,
+"symbol": "cloudy",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+},
+{
+"dato": "2026-11-10",
+"tmin": -1,
+"tmax": 1,
+"nedbor": 0.0,
+"vind": 1,
+"symbol": "cloudy",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+},
+{
+"dato": "2026-11-11",
+"tmin": -1,
+"tmax": 4,
+"nedbor": 0.0,
+"vind": 4,
+"symbol": "cloudy",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+},
+{
+"dato": "2026-11-12",
+"tmin": 3,
+"tmax": 4,
+"nedbor": 0.0,
+"vind": 4,
+"symbol": "cloudy",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+},
+{
+"dato": "2026-11-13",
+"tmin": -2,
+"tmax": 2,
+"nedbor": 0.0,
+"vind": 3,
+"symbol": "fair_day",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+},
+{
+"dato": "2026-11-14",
+"tmin": -2,
+"tmax": 2,
+"nedbor": 0.0,
+"vind": 2,
+"symbol": "fair_day",
+"glatt": false,
+"oppdatert": "2026-11-06T10:39+00:00"
+}
+]
