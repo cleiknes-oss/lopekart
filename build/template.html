@@ -27,6 +27,8 @@
   .layers .seg { flex-direction: column; }
   .layers .seg button { border-right: 0; border-bottom: 1px solid var(--line); text-align: left; }
   .layers .seg button:last-child { border-bottom: 0; }
+  .layers #over { border-top: 2px solid var(--line); }
+  .layers #over button[aria-pressed="true"] { background: #2f7d4f; color: #fff; }
   .leaflet-popup-content { font: 14px/1.4 system-ui, sans-serif; margin: 12px 14px; }
   .pop b { font-size: 15px; }
   .pop .m { color: #6b6860; font-size: 12px; }
@@ -73,7 +75,7 @@
   <select class="box" id="type" aria-label="Type"><option value="">Alle typer</option></select>
   <select class="box" id="route" aria-label="Velg tur"><option value="">Velg en tur …</option></select>
 </div>
-<div class="box layers"><div class="seg" id="base"></div></div>
+<div class="box layers"><div class="seg" id="base"></div><div class="seg" id="over"></div></div>
 <div class="box legend" id="legend"></div>
 <div class="box note" id="note" role="status" hidden><span id="note-t"></span><button type="button" id="note-x" aria-label="Lukk">×</button></div>
 
@@ -112,6 +114,12 @@ const BASES = {
   'Satellitt': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 19, attribution: 'Bilder &copy; Esri, Maxar, Earthstar Geographics'}),
   'OpenStreetMap': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}),
 };
+// Merkede turruter fra Kartverkets Turrutebase (oppdateres ukentlig), som valgfrie lag oppå kartet
+const TUR = 'https://wms.geonorge.no/skwms1/wms.friluftsruter2';
+const OVER = {
+  'Merkede stier': L.tileLayer.wms(TUR, {layers: 'Fotrute', format: 'image/png', transparent: true, maxZoom: 19, attribution: 'Turruter &copy; <a href="https://www.kartverket.no/">Kartverket</a>'}),
+  'Skiløyper': L.tileLayer.wms(TUR, {layers: 'Skiloype', format: 'image/png', transparent: true, maxZoom: 19, attribution: 'Turruter &copy; <a href="https://www.kartverket.no/">Kartverket</a>'}),
+};
 // Kartverket dekker bare Norge: utenfor Norge byttes automatisk til OpenStreetMap
 let baseName = 'Kart';
 try { baseName = localStorage.getItem('lopekart.base') || 'Kart'; } catch (e) { /* ingen lagring */ }
@@ -127,6 +135,16 @@ Object.keys(BASES).forEach((n) => {
     restyle();
   };
   baseBox.append(b);
+});
+const overBox = document.getElementById('over');
+let aktive = []; try { aktive = JSON.parse(localStorage.getItem('lopekart.over') || '[]'); } catch (e) { /* ingen lagring */ }
+Object.keys(OVER).forEach((n) => {
+  const b = document.createElement('button'); const pa = aktive.includes(n); b.textContent = n; b.setAttribute('aria-pressed', String(pa));
+  if (pa) OVER[n].addTo(map);
+  b.onclick = () => { const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on));
+    if (on) OVER[n].addTo(map); else map.removeLayer(OVER[n]);
+    aktive = Object.keys(OVER).filter((k) => map.hasLayer(OVER[k])); try { localStorage.setItem('lopekart.over', JSON.stringify(aktive)); } catch (e) { /* ingen lagring */ } };
+  overBox.append(b);
 });
 
 const acts = DATA.map((a) => ({...a, segs: a.p.map(decode), c: COLORS[a.t] || COLORS.Annet}));
