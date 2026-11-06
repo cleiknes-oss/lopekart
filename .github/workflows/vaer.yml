@@ -1,0 +1,64 @@
+name: Værvarsel
+# Henter værvarsel for Enebakk fra Meteorologisk institutt (api.met.no, CC BY 4.0) to ganger i døgnet
+# og lagrer et dagssammendrag i data/vaer.json. Brukes av ukeplanen i treningsportalen.
+on:
+  schedule:
+    - cron: '7 4,16 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: vaer
+jobs:
+  hent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hent og oppsummer
+        run: |
+          python3 - <<'PY'
+          import json, urllib.request, datetime, collections
+          from zoneinfo import ZoneInfo
+          LAT, LON = 59.77, 11.10
+          url = f"https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={LAT}&lon={LON}"
+          req = urllib.request.Request(url, headers={"User-Agent": "treningsportal github.com/cleiknes-oss/lopekart"})
+          d = json.load(urllib.request.urlopen(req, timeout=30))
+          tz = ZoneInfo("Europe/Oslo")
+          dager = collections.OrderedDict()
+          for p in d["properties"]["timeseries"]:
+              t = datetime.datetime.fromisoformat(p["time"].replace("Z", "+00:00")).astimezone(tz)
+              x = p["data"]; ins = x["instant"]["details"]
+              g = dager.setdefault(t.date().isoformat(), {"temp": [], "vind": [], "nedbor": 0.0, "symboler": []})
+              g["temp"].append(ins.get("air_temperature")); g["vind"].append(ins.get("wind_speed") or 0)
+              if "next_1_hours" in x:
+                  g["nedbor"] += x["next_1_hours"]["details"].get("precipitation_amount", 0)
+                  s = x["next_1_hours"]["summary"]["symbol_code"]
+              elif "next_6_hours" in x:
+                  g["nedbor"] += x["next_6_hours"]["details"].get("precipitation_amount", 0)
+                  s = x["next_6_hours"]["summary"]["symbol_code"]
+              else:
+                  s = None
+              if s and 8 <= t.hour <= 18:
+                  g["symboler"].append(s)
+          na = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="minutes")
+          rader, forrige = [], 0
+          for dato, g in dager.items():
+              temp = [v for v in g["temp"] if v is not None]
+              if len(temp) < 2:
+                  continue
+              tmin, tmax, ned = min(temp), max(temp), round(g["nedbor"], 1)
+              sym = collections.Counter(g["symboler"]).most_common(1)[0][0] if g["symboler"] else ""
+              glatt = tmin <= 1 and tmax >= -4 and (ned >= 0.5 or forrige >= 0.5)
+              rader.append({"dato": dato, "tmin": round(tmin), "tmax": round(tmax), "nedbor": ned, "vind": round(max(g["vind"])),
+                            "symbol": sym, "glatt": glatt, "oppdatert": na})
+              forrige = ned
+          import os
+          os.makedirs("data", exist_ok=True)
+          json.dump(rader[:9], open("data/vaer.json", "w"), ensure_ascii=False, indent=0)
+          print(len(rader), "dager")
+          PY
+      - name: Lagre
+        run: |
+          git config user.name "vaervarsel"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/vaer.json
+          git diff --cached --quiet || (git commit -m "Værvarsel" && git push)
