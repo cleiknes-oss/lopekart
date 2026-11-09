@@ -1,15 +1,5 @@
 [
 {
-"dato": "2026-11-08",
-"tmin": 1,
-"tmax": 2,
-"nedbor": 0.0,
-"vind": 1,
-"symbol": "",
-"glatt": false,
-"oppdatert": "2026-11-08T20:23+00:00"
-},
-{
 "dato": "2026-11-09",
 "tmin": 1,
 "tmax": 2,
@@ -17,76 +7,86 @@
 "vind": 1,
 "symbol": "fog",
 "glatt": false,
-"oppdatert": "2026-11-08T20:23+00:00"
+"oppdatert": "2026-11-09T12:44+00:00"
 },
 {
 "dato": "2026-11-10",
 "tmin": 0,
-"tmax": 2,
+"tmax": 1,
 "nedbor": 0.0,
 "vind": 1,
 "symbol": "fog",
 "glatt": false,
-"oppdatert": "2026-11-08T20:23+00:00"
+"oppdatert": "2026-11-09T12:44+00:00"
 },
 {
 "dato": "2026-11-11",
-"tmin": -1,
+"tmin": 0,
 "tmax": 1,
 "nedbor": 0.0,
 "vind": 1,
-"symbol": "cloudy",
+"symbol": "fog",
 "glatt": false,
-"oppdatert": "2026-11-08T20:23+00:00"
+"oppdatert": "2026-11-09T12:44+00:00"
 },
 {
 "dato": "2026-11-12",
-"tmin": -2,
+"tmin": -1,
 "tmax": 0,
-"nedbor": 2.4,
+"nedbor": 2.9,
 "vind": 3,
 "symbol": "cloudy",
 "glatt": true,
-"oppdatert": "2026-11-08T20:23+00:00"
+"oppdatert": "2026-11-09T12:44+00:00"
 },
 {
 "dato": "2026-11-13",
-"tmin": -3,
-"tmax": 2,
+"tmin": -2,
+"tmax": 1,
 "nedbor": 0.0,
-"vind": 3,
-"symbol": "clearsky_day",
+"vind": 4,
+"symbol": "fair_day",
 "glatt": true,
-"oppdatert": "2026-11-08T20:23+00:00"
+"oppdatert": "2026-11-09T12:44+00:00"
 },
 {
 "dato": "2026-11-14",
-"tmin": -2,
-"tmax": 2,
+"tmin": -4,
+"tmax": 3,
 "nedbor": 0.0,
 "vind": 4,
 "symbol": "partlycloudy_day",
 "glatt": false,
-"oppdatert": "2026-11-08T20:23+00:00"
+"oppdatert": "2026-11-09T12:44+00:00"
 },
 {
 "dato": "2026-11-15",
-"tmin": 0,
+"tmin": 2,
 "tmax": 4,
 "nedbor": 0.0,
-"vind": 4,
+"vind": 5,
 "symbol": "partlycloudy_day",
 "glatt": false,
-"oppdatert": "2026-11-08T20:23+00:00"
+"oppdatert": "2026-11-09T12:44+00:00"
 },
 {
 "dato": "2026-11-16",
-"tmin": 1,
-"tmax": 3,
-"nedbor": 4.3,
+"tmin": 3,
+"tmax": 5,
+"nedbor": 7.7,
+"vind": 5,
+"symbol": "rain",
+"glatt": false,
+"oppdatert": "2026-11-09T12:44+00:00"
+},
+{
+"dato": "2026-11-17",
+"tmin": 3,
+"tmax": 5,
+"nedbor": 0.0,
 "vind": 4,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-08T20:23+00:00"
+"oppdatert": "2026-11-09T12:44+00:00"
 }
 ]
