@@ -2,52 +2,52 @@
 {
 "dato": "2026-11-10",
 "tmin": -1,
-"tmax": 1,
-"nedbor": 0.1,
+"tmax": -1,
+"nedbor": 0.4,
 "vind": 1,
-"symbol": "cloudy",
+"symbol": "",
 "glatt": false,
-"oppdatert": "2026-11-10T12:29+00:00"
+"oppdatert": "2026-11-10T21:46+00:00"
 },
 {
 "dato": "2026-11-11",
-"tmin": 0,
-"tmax": 2,
-"nedbor": 0.2,
+"tmin": -2,
+"tmax": 0,
+"nedbor": 0.0,
 "vind": 1,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-10T12:29+00:00"
+"oppdatert": "2026-11-10T21:46+00:00"
 },
 {
 "dato": "2026-11-12",
-"tmin": 1,
+"tmin": 0,
 "tmax": 1,
-"nedbor": 18.8,
+"nedbor": 19.9,
 "vind": 6,
-"symbol": "heavysnow",
+"symbol": "snow",
 "glatt": true,
-"oppdatert": "2026-11-10T12:29+00:00"
+"oppdatert": "2026-11-10T21:46+00:00"
 },
 {
 "dato": "2026-11-13",
 "tmin": -2,
-"tmax": 2,
+"tmax": 1,
 "nedbor": 0.0,
 "vind": 5,
 "symbol": "clearsky_day",
 "glatt": true,
-"oppdatert": "2026-11-10T12:29+00:00"
+"oppdatert": "2026-11-10T21:46+00:00"
 },
 {
 "dato": "2026-11-14",
-"tmin": -4,
+"tmin": -5,
 "tmax": 4,
 "nedbor": 0.0,
 "vind": 5,
 "symbol": "partlycloudy_day",
 "glatt": false,
-"oppdatert": "2026-11-10T12:29+00:00"
+"oppdatert": "2026-11-10T21:46+00:00"
 },
 {
 "dato": "2026-11-15",
@@ -57,36 +57,36 @@
 "vind": 5,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-10T12:29+00:00"
+"oppdatert": "2026-11-10T21:46+00:00"
 },
 {
 "dato": "2026-11-16",
-"tmin": 2,
-"tmax": 2,
-"nedbor": 8.2,
+"tmin": 1,
+"tmax": 3,
+"nedbor": 7.5,
 "vind": 4,
-"symbol": "rain",
+"symbol": "sleet",
 "glatt": false,
-"oppdatert": "2026-11-10T12:29+00:00"
+"oppdatert": "2026-11-10T21:46+00:00"
 },
 {
 "dato": "2026-11-17",
-"tmin": 2,
-"tmax": 4,
-"nedbor": 8.4,
+"tmin": 1,
+"tmax": 2,
+"nedbor": 6.0,
 "vind": 4,
 "symbol": "cloudy",
-"glatt": false,
-"oppdatert": "2026-11-10T12:29+00:00"
+"glatt": true,
+"oppdatert": "2026-11-10T21:46+00:00"
 },
 {
 "dato": "2026-11-18",
-"tmin": 2,
-"tmax": 3,
+"tmin": -1,
+"tmax": 1,
 "nedbor": 0.0,
-"vind": 3,
+"vind": 2,
 "symbol": "cloudy",
-"glatt": false,
-"oppdatert": "2026-11-10T12:29+00:00"
+"glatt": true,
+"oppdatert": "2026-11-10T21:46+00:00"
 }
 ]
