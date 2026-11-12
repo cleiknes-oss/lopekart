@@ -1,73 +1,63 @@
 [
 {
-"dato": "2026-11-12",
-"tmin": 1,
-"tmax": 1,
-"nedbor": 0.6,
-"vind": 5,
-"symbol": "cloudy",
-"glatt": true,
-"oppdatert": "2026-11-12T12:33+00:00"
-},
-{
 "dato": "2026-11-13",
-"tmin": -1,
+"tmin": -2,
 "tmax": 3,
-"nedbor": 0.3,
+"nedbor": 0.1,
 "vind": 5,
-"symbol": "partlycloudy_day",
-"glatt": true,
-"oppdatert": "2026-11-12T12:33+00:00"
+"symbol": "fair_day",
+"glatt": false,
+"oppdatert": "2026-11-12T22:12+00:00"
 },
 {
 "dato": "2026-11-14",
 "tmin": -3,
-"tmax": 4,
+"tmax": 3,
 "nedbor": 0.0,
 "vind": 4,
-"symbol": "partlycloudy_day",
+"symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-12T12:33+00:00"
+"oppdatert": "2026-11-12T22:12+00:00"
 },
 {
 "dato": "2026-11-15",
-"tmin": 2,
-"tmax": 5,
-"nedbor": 2.7,
+"tmin": 3,
+"tmax": 6,
+"nedbor": 2.3,
 "vind": 5,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-12T12:33+00:00"
+"oppdatert": "2026-11-12T22:12+00:00"
 },
 {
 "dato": "2026-11-16",
 "tmin": 3,
 "tmax": 5,
-"nedbor": 10.6,
+"nedbor": 11.1,
 "vind": 4,
 "symbol": "rain",
 "glatt": false,
-"oppdatert": "2026-11-12T12:33+00:00"
+"oppdatert": "2026-11-12T22:12+00:00"
 },
 {
 "dato": "2026-11-17",
 "tmin": 1,
 "tmax": 2,
-"nedbor": 3.2,
+"nedbor": 0.0,
 "vind": 3,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-12T12:33+00:00"
+"oppdatert": "2026-11-12T22:12+00:00"
 },
 {
 "dato": "2026-11-18",
-"tmin": -1,
+"tmin": -2,
 "tmax": 1,
 "nedbor": 0.0,
 "vind": 3,
 "symbol": "cloudy",
-"glatt": true,
-"oppdatert": "2026-11-12T12:33+00:00"
+"glatt": false,
+"oppdatert": "2026-11-12T22:12+00:00"
 },
 {
 "dato": "2026-11-19",
@@ -77,16 +67,26 @@
 "vind": 3,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-12T12:33+00:00"
+"oppdatert": "2026-11-12T22:12+00:00"
 },
 {
 "dato": "2026-11-20",
 "tmin": -4,
-"tmax": 0,
+"tmax": -1,
 "nedbor": 0.0,
 "vind": 3,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-12T12:33+00:00"
+"oppdatert": "2026-11-12T22:12+00:00"
+},
+{
+"dato": "2026-11-21",
+"tmin": -4,
+"tmax": -1,
+"nedbor": 0.0,
+"vind": 2,
+"symbol": "clearsky_day",
+"glatt": false,
+"oppdatert": "2026-11-12T22:12+00:00"
 }
 ]
