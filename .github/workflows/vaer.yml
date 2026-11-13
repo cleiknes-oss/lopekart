@@ -69,7 +69,7 @@ jobs:
               a, b = (idag - datetime.timedelta(days=30)).isoformat(), idag.isoformat()
               u = f"https://gts.nve.no/api/GridTimeSeries/281042/6632239/{a}/{b}/sd.json"
               g = json.load(urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "treningsportal"}), timeout=30))
-              start = datetime.date.fromisoformat(g["StartDate"][:10])
+              start = datetime.datetime.strptime(g["StartDate"][:10], "%d.%m.%Y").date()
               sd = {}
               for i, v in enumerate(g["Data"]):
                   if v is not None and v > -1000:
