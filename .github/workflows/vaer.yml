@@ -53,7 +53,34 @@ jobs:
               forrige = ned
           import os
           os.makedirs("data", exist_ok=True)
-          json.dump(rader[:9], open("data/vaer.json", "w"), ensure_ascii=False, indent=0)
+          rader = rader[:9]
+          # Behold de siste 30 dagene fra før (siste prognose for hver dag), så portalen kan se kuldeperioder og snøfall bakover
+          idag = datetime.datetime.now(tz).date()
+          try:
+              gamle = json.load(open("data/vaer.json"))
+          except Exception:
+              gamle = []
+          nye = {r["dato"] for r in rader}
+          fra = (idag - datetime.timedelta(days=30)).isoformat()
+          bak = [r for r in gamle if r.get("dato") and fra <= r["dato"] < idag.isoformat() and r["dato"] not in nye]
+          rader = sorted(bak + rader, key=lambda r: r["dato"])
+          # Snødybde (cm) fra NVE/seNorge for punktet (UTM33 281042, 6632239), siste 30 dager og i dag
+          try:
+              a, b = (idag - datetime.timedelta(days=30)).isoformat(), idag.isoformat()
+              u = f"https://gts.nve.no/api/GridTimeSeries/281042/6632239/{a}/{b}/sd.json"
+              g = json.load(urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "treningsportal"}), timeout=30))
+              start = datetime.date.fromisoformat(g["StartDate"][:10])
+              sd = {}
+              for i, v in enumerate(g["Data"]):
+                  if v is not None and v > -1000:
+                      sd[(start + datetime.timedelta(days=i)).isoformat()] = round(v)
+              for r in rader:
+                  if r["dato"] in sd:
+                      r["sno_cm"] = sd[r["dato"]]
+              print("snødybde:", list(sd.items())[-3:])
+          except Exception as e:
+              print("snødybde feilet:", e)
+          json.dump(rader, open("data/vaer.json", "w"), ensure_ascii=False, indent=0)
           print(len(rader), "dager")
           PY
       - name: Lagre
