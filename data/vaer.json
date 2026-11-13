@@ -2,12 +2,12 @@
 {
 "dato": "2026-11-13",
 "tmin": -3,
-"tmax": 2,
+"tmax": -3,
 "nedbor": 0.0,
-"vind": 4,
-"symbol": "fair_day",
+"vind": 2,
+"symbol": "",
 "glatt": false,
-"oppdatert": "2026-11-13T12:39+00:00",
+"oppdatert": "2026-11-13T21:55+00:00",
 "sno_cm": 9
 },
 {
@@ -18,76 +18,76 @@
 "vind": 4,
 "symbol": "partlycloudy_day",
 "glatt": false,
-"oppdatert": "2026-11-13T12:39+00:00"
+"oppdatert": "2026-11-13T21:55+00:00"
 },
 {
 "dato": "2026-11-15",
 "tmin": 2,
-"tmax": 6,
-"nedbor": 2.5,
-"vind": 5,
+"tmax": 7,
+"nedbor": 2.3,
+"vind": 6,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-13T12:39+00:00"
+"oppdatert": "2026-11-13T21:55+00:00"
 },
 {
 "dato": "2026-11-16",
-"tmin": 3,
-"tmax": 5,
-"nedbor": 9.2,
+"tmin": 2,
+"tmax": 4,
+"nedbor": 13.8,
 "vind": 4,
-"symbol": "lightrain",
+"symbol": "sleet",
 "glatt": false,
-"oppdatert": "2026-11-13T12:39+00:00"
+"oppdatert": "2026-11-13T21:55+00:00"
 },
 {
 "dato": "2026-11-17",
 "tmin": 1,
 "tmax": 2,
 "nedbor": 0.0,
-"vind": 3,
+"vind": 4,
 "symbol": "cloudy",
 "glatt": true,
-"oppdatert": "2026-11-13T12:39+00:00"
+"oppdatert": "2026-11-13T21:55+00:00"
 },
 {
 "dato": "2026-11-18",
-"tmin": -2,
-"tmax": 1,
+"tmin": -4,
+"tmax": -1,
 "nedbor": 0.0,
-"vind": 2,
-"symbol": "fair_day",
+"vind": 3,
+"symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-13T12:39+00:00"
+"oppdatert": "2026-11-13T21:55+00:00"
 },
 {
 "dato": "2026-11-19",
-"tmin": -3,
-"tmax": 1,
+"tmin": -4,
+"tmax": -1,
 "nedbor": 0.0,
-"vind": 2,
-"symbol": "clearsky_day",
+"vind": 3,
+"symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-13T12:39+00:00"
+"oppdatert": "2026-11-13T21:55+00:00"
 },
 {
 "dato": "2026-11-20",
 "tmin": -4,
-"tmax": -1,
+"tmax": 0,
 "nedbor": 0.0,
-"vind": 2,
-"symbol": "clearsky_day",
+"vind": 3,
+"symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-13T12:39+00:00"
+"oppdatert": "2026-11-13T21:55+00:00"
 },
 {
 "dato": "2026-11-21",
-"tmin": -4,
+"tmin": -5,
 "tmax": -1,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "clearsky_day",
+"symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-13T12:39+00:00"
+"oppdatert": "2026-11-13T21:55+00:00"
 }
 ]
