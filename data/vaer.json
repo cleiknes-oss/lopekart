@@ -1,43 +1,43 @@
 [
 {
 "dato": "2026-11-13",
-"tmin": -2,
-"tmax": 3,
-"nedbor": 0.1,
+"tmin": -3,
+"tmax": 2,
+"nedbor": 0.0,
 "vind": 5,
 "symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"oppdatert": "2026-11-13T12:04+00:00"
 },
 {
 "dato": "2026-11-14",
-"tmin": -3,
+"tmin": -4,
 "tmax": 3,
 "nedbor": 0.0,
 "vind": 4,
-"symbol": "cloudy",
+"symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"oppdatert": "2026-11-13T12:04+00:00"
 },
 {
 "dato": "2026-11-15",
-"tmin": 3,
+"tmin": 2,
 "tmax": 6,
-"nedbor": 2.3,
+"nedbor": 2.9,
 "vind": 5,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"oppdatert": "2026-11-13T12:04+00:00"
 },
 {
 "dato": "2026-11-16",
 "tmin": 3,
 "tmax": 5,
-"nedbor": 11.1,
+"nedbor": 9.2,
 "vind": 4,
-"symbol": "rain",
+"symbol": "lightrain",
 "glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"oppdatert": "2026-11-13T12:04+00:00"
 },
 {
 "dato": "2026-11-17",
@@ -46,38 +46,38 @@
 "nedbor": 0.0,
 "vind": 3,
 "symbol": "cloudy",
-"glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"glatt": true,
+"oppdatert": "2026-11-13T12:04+00:00"
 },
 {
 "dato": "2026-11-18",
 "tmin": -2,
 "tmax": 1,
 "nedbor": 0.0,
-"vind": 3,
-"symbol": "cloudy",
+"vind": 2,
+"symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"oppdatert": "2026-11-13T12:04+00:00"
 },
 {
 "dato": "2026-11-19",
-"tmin": -4,
-"tmax": 0,
+"tmin": -3,
+"tmax": 1,
 "nedbor": 0.0,
-"vind": 3,
-"symbol": "cloudy",
+"vind": 2,
+"symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"oppdatert": "2026-11-13T12:04+00:00"
 },
 {
 "dato": "2026-11-20",
 "tmin": -4,
 "tmax": -1,
 "nedbor": 0.0,
-"vind": 3,
-"symbol": "cloudy",
+"vind": 2,
+"symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"oppdatert": "2026-11-13T12:04+00:00"
 },
 {
 "dato": "2026-11-21",
@@ -87,6 +87,6 @@
 "vind": 2,
 "symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-12T22:12+00:00"
+"oppdatert": "2026-11-13T12:04+00:00"
 }
 ]
