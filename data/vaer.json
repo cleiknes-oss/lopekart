@@ -24,53 +24,53 @@
 {
 "dato": "2026-11-15",
 "tmin": 5,
-"tmax": 7,
-"nedbor": 2.6,
-"vind": 6,
-"symbol": "cloudy",
+"tmax": 5,
+"nedbor": 0.0,
+"vind": 4,
+"symbol": "",
 "glatt": false,
-"oppdatert": "2026-11-15T11:53+00:00",
+"oppdatert": "2026-11-15T20:58+00:00",
 "sno_cm": 5
 },
 {
 "dato": "2026-11-16",
 "tmin": 1,
-"tmax": 4,
-"nedbor": 0.7,
+"tmax": 5,
+"nedbor": 0.5,
 "vind": 4,
 "symbol": "cloudy",
 "glatt": true,
-"oppdatert": "2026-11-15T11:53+00:00"
+"oppdatert": "2026-11-15T20:58+00:00"
 },
 {
 "dato": "2026-11-17",
-"tmin": 0,
+"tmin": -1,
 "tmax": 1,
 "nedbor": 0.0,
 "vind": 4,
 "symbol": "clearsky_day",
 "glatt": true,
-"oppdatert": "2026-11-15T11:53+00:00"
+"oppdatert": "2026-11-15T20:58+00:00"
 },
 {
 "dato": "2026-11-18",
 "tmin": -5,
-"tmax": -2,
+"tmax": -1,
 "nedbor": 0.0,
-"vind": 3,
+"vind": 4,
 "symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-15T11:53+00:00"
+"oppdatert": "2026-11-15T20:58+00:00"
 },
 {
 "dato": "2026-11-19",
 "tmin": -6,
-"tmax": -1,
+"tmax": -2,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "partlycloudy_day",
+"symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-15T11:53+00:00"
+"oppdatert": "2026-11-15T20:58+00:00"
 },
 {
 "dato": "2026-11-20",
@@ -78,29 +78,29 @@
 "tmax": 0,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "fair_day",
+"symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-15T11:53+00:00"
+"oppdatert": "2026-11-15T20:58+00:00"
 },
 {
 "dato": "2026-11-21",
-"tmin": -5,
+"tmin": -4,
 "tmax": -1,
 "nedbor": 0.0,
 "vind": 2,
 "symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-15T11:53+00:00"
+"oppdatert": "2026-11-15T20:58+00:00"
 },
 {
 "dato": "2026-11-22",
-"tmin": -6,
-"tmax": -4,
+"tmin": -5,
+"tmax": -2,
 "nedbor": 0.0,
 "vind": 2,
 "symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-15T11:53+00:00"
+"oppdatert": "2026-11-15T20:58+00:00"
 },
 {
 "dato": "2026-11-23",
@@ -110,6 +110,6 @@
 "vind": 2,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-15T11:53+00:00"
+"oppdatert": "2026-11-15T20:58+00:00"
 }
 ]
