@@ -45,33 +45,34 @@
 },
 {
 "dato": "2026-11-17",
-"tmin": -2,
+"tmin": -3,
 "tmax": 1,
 "nedbor": 0.0,
 "vind": 4,
 "symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-16T12:38+00:00"
+"oppdatert": "2026-11-17T00:09+00:00",
+"sno_cm": 0
 },
 {
 "dato": "2026-11-18",
 "tmin": -4,
-"tmax": 0,
+"tmax": -1,
 "nedbor": 0.0,
 "vind": 4,
 "symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-16T12:38+00:00"
+"oppdatert": "2026-11-17T00:09+00:00"
 },
 {
 "dato": "2026-11-19",
-"tmin": -6,
-"tmax": 0,
+"tmin": -5,
+"tmax": -2,
 "nedbor": 0.0,
 "vind": 2,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-16T12:38+00:00"
+"oppdatert": "2026-11-17T00:09+00:00"
 },
 {
 "dato": "2026-11-20",
@@ -79,9 +80,9 @@
 "tmax": 0,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "fair_day",
+"symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-16T12:38+00:00"
+"oppdatert": "2026-11-17T00:09+00:00"
 },
 {
 "dato": "2026-11-21",
@@ -89,29 +90,29 @@
 "tmax": 0,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "clearsky_day",
+"symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-16T12:38+00:00"
+"oppdatert": "2026-11-17T00:09+00:00"
 },
 {
 "dato": "2026-11-22",
 "tmin": -4,
 "tmax": 0,
 "nedbor": 0.0,
-"vind": 2,
+"vind": 3,
 "symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-16T12:38+00:00"
+"oppdatert": "2026-11-17T00:09+00:00"
 },
 {
 "dato": "2026-11-23",
-"tmin": -6,
+"tmin": -5,
 "tmax": -2,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "cloudy",
+"symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-16T12:38+00:00"
+"oppdatert": "2026-11-17T00:09+00:00"
 },
 {
 "dato": "2026-11-24",
@@ -119,8 +120,18 @@
 "tmax": -3,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "fair_day",
+"symbol": "partlycloudy_day",
 "glatt": false,
-"oppdatert": "2026-11-16T12:38+00:00"
+"oppdatert": "2026-11-17T00:09+00:00"
+},
+{
+"dato": "2026-11-25",
+"tmin": -4,
+"tmax": -2,
+"nedbor": 0.0,
+"vind": 3,
+"symbol": "cloudy",
+"glatt": false,
+"oppdatert": "2026-11-17T00:09+00:00"
 }
 ]
