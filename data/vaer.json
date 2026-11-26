@@ -111,82 +111,93 @@
 },
 {
 "dato": "2026-11-26",
-"tmin": -8,
-"tmax": -3,
+"tmin": -10,
+"tmax": -4,
 "nedbor": 0.0,
 "vind": 2,
 "symbol": "clearsky_day",
 "glatt": false,
-"oppdatert": "2026-11-25T14:09+00:00"
+"oppdatert": "2026-11-26T00:11+00:00",
+"sno_cm": 0
 },
 {
 "dato": "2026-11-27",
-"tmin": -3,
-"tmax": -1,
+"tmin": -6,
+"tmax": -2,
 "nedbor": 0.0,
-"vind": 1,
-"symbol": "cloudy",
+"vind": 2,
+"symbol": "partlycloudy_day",
 "glatt": false,
-"oppdatert": "2026-11-25T14:09+00:00"
+"oppdatert": "2026-11-26T00:11+00:00"
 },
 {
 "dato": "2026-11-28",
 "tmin": -3,
 "tmax": 0,
 "nedbor": 0.0,
-"vind": 3,
+"vind": 4,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-25T14:09+00:00"
+"oppdatert": "2026-11-26T00:11+00:00"
 },
 {
 "dato": "2026-11-29",
-"tmin": -1,
+"tmin": -2,
 "tmax": 0,
-"nedbor": 7.4,
+"nedbor": 3.6,
 "vind": 4,
-"symbol": "snow",
+"symbol": "lightsnow",
 "glatt": true,
-"oppdatert": "2026-11-25T14:09+00:00"
+"oppdatert": "2026-11-26T00:11+00:00"
 },
 {
 "dato": "2026-11-30",
 "tmin": 0,
-"tmax": 1,
-"nedbor": 3.0,
-"vind": 3,
+"tmax": 3,
+"nedbor": 3.2,
+"vind": 4,
 "symbol": "cloudy",
 "glatt": true,
-"oppdatert": "2026-11-25T14:09+00:00"
+"oppdatert": "2026-11-26T00:11+00:00"
 },
 {
 "dato": "2026-12-01",
-"tmin": 2,
+"tmin": 4,
 "tmax": 5,
 "nedbor": 0.0,
-"vind": 4,
+"vind": 5,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-25T14:09+00:00"
+"oppdatert": "2026-11-26T00:11+00:00"
 },
 {
 "dato": "2026-12-02",
-"tmin": 2,
-"tmax": 3,
-"nedbor": 3.5,
-"vind": 3,
-"symbol": "cloudy",
+"tmin": 3,
+"tmax": 4,
+"nedbor": 4.3,
+"vind": 4,
+"symbol": "lightrain",
 "glatt": false,
-"oppdatert": "2026-11-25T14:09+00:00"
+"oppdatert": "2026-11-26T00:11+00:00"
 },
 {
 "dato": "2026-12-03",
-"tmin": 0,
-"tmax": 3,
+"tmin": -1,
+"tmax": 2,
 "nedbor": 0.0,
-"vind": 3,
+"vind": 2,
 "symbol": "cloudy",
 "glatt": true,
-"oppdatert": "2026-11-25T14:09+00:00"
+"oppdatert": "2026-11-26T00:11+00:00"
+},
+{
+"dato": "2026-12-04",
+"tmin": -2,
+"tmax": 0,
+"nedbor": 0.0,
+"vind": 2,
+"symbol": "partlycloudy_day",
+"glatt": false,
+"oppdatert": "2026-11-26T00:11+00:00"
 }
 ]
