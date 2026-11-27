@@ -122,13 +122,13 @@
 },
 {
 "dato": "2026-11-27",
-"tmin": -6,
+"tmin": -4,
 "tmax": -3,
 "nedbor": 0.0,
 "vind": 2,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-27T00:30+00:00",
+"oppdatert": "2026-11-27T13:44+00:00",
 "sno_cm": 0
 },
 {
@@ -139,47 +139,47 @@
 "vind": 3,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-27T00:30+00:00"
+"oppdatert": "2026-11-27T13:44+00:00"
 },
 {
 "dato": "2026-11-29",
 "tmin": -2,
 "tmax": 0,
-"nedbor": 3.8,
+"nedbor": 5.0,
 "vind": 4,
 "symbol": "lightsnow",
 "glatt": true,
-"oppdatert": "2026-11-27T00:30+00:00"
+"oppdatert": "2026-11-27T13:44+00:00"
 },
 {
 "dato": "2026-11-30",
 "tmin": 0,
-"tmax": 5,
-"nedbor": 2.1,
-"vind": 5,
+"tmax": 4,
+"nedbor": 4.2,
+"vind": 4,
 "symbol": "cloudy",
 "glatt": true,
-"oppdatert": "2026-11-27T00:30+00:00"
+"oppdatert": "2026-11-27T13:44+00:00"
 },
 {
 "dato": "2026-12-01",
-"tmin": 5,
-"tmax": 6,
-"nedbor": 3.7,
+"tmin": 6,
+"tmax": 7,
+"nedbor": 4.3,
 "vind": 5,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-27T00:30+00:00"
+"oppdatert": "2026-11-27T13:44+00:00"
 },
 {
 "dato": "2026-12-02",
-"tmin": 4,
-"tmax": 5,
-"nedbor": 8.4,
+"tmin": 5,
+"tmax": 7,
+"nedbor": 6.7,
 "vind": 5,
 "symbol": "rain",
 "glatt": false,
-"oppdatert": "2026-11-27T00:30+00:00"
+"oppdatert": "2026-11-27T13:44+00:00"
 },
 {
 "dato": "2026-12-03",
@@ -187,19 +187,19 @@
 "tmax": 3,
 "nedbor": 0.0,
 "vind": 3,
-"symbol": "cloudy",
+"symbol": "fair_day",
 "glatt": true,
-"oppdatert": "2026-11-27T00:30+00:00"
+"oppdatert": "2026-11-27T13:44+00:00"
 },
 {
 "dato": "2026-12-04",
 "tmin": 0,
-"tmax": 2,
+"tmax": 3,
 "nedbor": 0.0,
 "vind": 3,
-"symbol": "clearsky_day",
+"symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-27T00:30+00:00"
+"oppdatert": "2026-11-27T13:44+00:00"
 },
 {
 "dato": "2026-12-05",
@@ -207,8 +207,8 @@
 "tmax": 0,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "partlycloudy_day",
+"symbol": "fair_day",
 "glatt": false,
-"oppdatert": "2026-11-27T00:30+00:00"
+"oppdatert": "2026-11-27T13:44+00:00"
 }
 ]
