@@ -122,13 +122,14 @@
 },
 {
 "dato": "2026-11-27",
-"tmin": -5,
-"tmax": -2,
+"tmin": -6,
+"tmax": -3,
 "nedbor": 0.0,
 "vind": 2,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-26T13:46+00:00"
+"oppdatert": "2026-11-27T00:30+00:00",
+"sno_cm": 0
 },
 {
 "dato": "2026-11-28",
@@ -138,66 +139,76 @@
 "vind": 3,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-26T13:46+00:00"
+"oppdatert": "2026-11-27T00:30+00:00"
 },
 {
 "dato": "2026-11-29",
 "tmin": -2,
 "tmax": 0,
-"nedbor": 3.6,
+"nedbor": 3.8,
 "vind": 4,
-"symbol": "cloudy",
+"symbol": "lightsnow",
 "glatt": true,
-"oppdatert": "2026-11-26T13:46+00:00"
+"oppdatert": "2026-11-27T00:30+00:00"
 },
 {
 "dato": "2026-11-30",
 "tmin": 0,
-"tmax": 4,
-"nedbor": 2.5,
+"tmax": 5,
+"nedbor": 2.1,
 "vind": 5,
 "symbol": "cloudy",
 "glatt": true,
-"oppdatert": "2026-11-26T13:46+00:00"
+"oppdatert": "2026-11-27T00:30+00:00"
 },
 {
 "dato": "2026-12-01",
-"tmin": 4,
-"tmax": 5,
-"nedbor": 3.1,
+"tmin": 5,
+"tmax": 6,
+"nedbor": 3.7,
 "vind": 5,
 "symbol": "cloudy",
 "glatt": false,
-"oppdatert": "2026-11-26T13:46+00:00"
+"oppdatert": "2026-11-27T00:30+00:00"
 },
 {
 "dato": "2026-12-02",
-"tmin": 2,
-"tmax": 4,
-"nedbor": 3.7,
+"tmin": 4,
+"tmax": 5,
+"nedbor": 8.4,
 "vind": 5,
-"symbol": "lightrain",
+"symbol": "rain",
 "glatt": false,
-"oppdatert": "2026-11-26T13:46+00:00"
+"oppdatert": "2026-11-27T00:30+00:00"
 },
 {
 "dato": "2026-12-03",
-"tmin": -1,
-"tmax": 2,
+"tmin": 0,
+"tmax": 3,
 "nedbor": 0.0,
-"vind": 2,
+"vind": 3,
 "symbol": "cloudy",
 "glatt": true,
-"oppdatert": "2026-11-26T13:46+00:00"
+"oppdatert": "2026-11-27T00:30+00:00"
 },
 {
 "dato": "2026-12-04",
-"tmin": -1,
-"tmax": 1,
+"tmin": 0,
+"tmax": 2,
+"nedbor": 0.0,
+"vind": 3,
+"symbol": "clearsky_day",
+"glatt": false,
+"oppdatert": "2026-11-27T00:30+00:00"
+},
+{
+"dato": "2026-12-05",
+"tmin": -2,
+"tmax": 0,
 "nedbor": 0.0,
 "vind": 2,
-"symbol": "fair_day",
+"symbol": "partlycloudy_day",
 "glatt": false,
-"oppdatert": "2026-11-26T13:46+00:00"
+"oppdatert": "2026-11-27T00:30+00:00"
 }
 ]
